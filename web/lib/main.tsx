@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ReactiveComponent, Computation } from 'telekinetic';
 import { render } from 'react-dom';
 
+// @ts-ignore
 import * as styles from './main.scss';
 
 class App extends ReactiveComponent {

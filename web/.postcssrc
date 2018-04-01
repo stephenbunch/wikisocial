@@ -1,0 +1,9 @@
+{
+  "modules": true,
+  "plugins": {
+    "autoprefixer": {},
+    "postcss-modules": {
+      "generateScopedName": "_[path]_[name]__[local]"
+    }
+  }
+}

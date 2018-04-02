@@ -1,0 +1,15 @@
+syntax = "proto3";
+package wikitribe;
+
+message Post {
+  string id = 1;
+  string message = 2;
+}
+
+message GetPostRequest {
+  string id = 1;
+}
+
+service PostService {
+  rpc GetPost(GetPostRequest) returns (Post) {}
+}

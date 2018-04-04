@@ -11,10 +11,20 @@
   version = "v3.3.2"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/gocql/gocql"
+  packages = [
+    ".",
+    "internal/lru",
+    "internal/murmur",
+    "internal/streams"
+  ]
+  revision = "12e3a8c05db483441932e84ab6c35c339fb01de7"
+
+[[projects]]
   name = "github.com/golang/protobuf"
   packages = [
     "proto",
-    "protoc-gen-go/descriptor",
     "ptypes",
     "ptypes/any",
     "ptypes/duration",
@@ -24,16 +34,44 @@
   version = "v1.0.0"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/golang/snappy"
+  packages = ["."]
+  revision = "553a641470496b2327abcac10b36396bd98e45c9"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/hailocab/go-hostpool"
+  packages = ["."]
+  revision = "e80d13ce29ede4452c43dea11e79b9bc8a15b478"
+
+[[projects]]
   name = "github.com/improbable-eng/grpc-web"
   packages = ["go/grpcweb"]
   revision = "9cca7d4530683dc49fc10cf627309ce4be119af5"
   version = "0.5.0"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/jmoiron/sqlx"
+  packages = ["reflectx"]
+  revision = "cf35089a197953c69420c8d0cecda90809764b1d"
+
+[[projects]]
   name = "github.com/rs/cors"
   packages = ["."]
   revision = "feef513b9575b32f84bafa580aad89b011259019"
   version = "v1.3.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/scylladb/gocqlx"
+  packages = [
+    ".",
+    "migrate",
+    "qb"
+  ]
+  revision = "9fa5432a65524efe309950bfe3771f3b37decd55"
 
 [[projects]]
   branch = "master"
@@ -95,8 +133,6 @@
     "metadata",
     "naming",
     "peer",
-    "reflection",
-    "reflection/grpc_reflection_v1alpha",
     "resolver",
     "resolver/dns",
     "resolver/passthrough",
@@ -108,9 +144,15 @@
   revision = "1e2570b1b19ade82d8dbb31bba4e65e9f9ef5b34"
   version = "v1.11.1"
 
+[[projects]]
+  name = "gopkg.in/inf.v0"
+  packages = ["."]
+  revision = "d2d2541c53f18d2a059457998ce2876cc8e67cbf"
+  version = "v0.9.1"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "e17599fbfd6b775b28dcb3cd1c97eb2fc4e420691e3be630616123e1cf04e53f"
+  inputs-digest = "d5acf82ee5d4fe6be9be01f6e2b05cff3400f4eb60004a381985fed9103fb630"
   solver-name = "gps-cdcl"
   solver-version = 1

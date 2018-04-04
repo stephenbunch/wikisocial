@@ -1,0 +1,23 @@
+syntax = "proto3";
+package wikitribe;
+
+message UserResponse {
+  string id = 1;
+  string name = 2;
+}
+
+message GetUserRequest {
+  string id = 1;
+}
+
+message ListUsersRequest {}
+
+message CreateUserRequest {
+  string name = 1;
+}
+
+service WikiTribeService {
+  rpc CreateUser(CreateUserRequest) returns (UserResponse) {}
+  rpc GetUser(GetUserRequest) returns (UserResponse) {}
+  rpc ListUsers(ListUsersRequest) returns (stream UserResponse) {}
+}

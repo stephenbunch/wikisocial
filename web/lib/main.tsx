@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ReactiveComponent, Computation, observable } from 'telekinetic';
+import { ReactiveComponent, Computation, observable, CollectionBrush, Store, bound } from 'telekinetic';
 import { render } from 'react-dom';
 import { grpc } from 'grpc-web-client';
 
@@ -24,6 +24,8 @@ class User {
   }
 }
 
+class UserBrush extends CollectionBrush<string, User>{ }
+
 const RPC_HOST = 'http://localhost:3000';
 
 class App extends ReactiveComponent {
@@ -34,16 +36,16 @@ class App extends ReactiveComponent {
   newUser = new UserForm();
 
   @observable
-  users = new Array<User>();
+  users = new Store<string, User>();
 
   construct(comp: Computation) {
     const request = new ListUsersRequest();
     grpc.invoke(WikiTribeService.ListUsers, {
       request: request,
       host: RPC_HOST,
-      onMessage: (user: UserResponse) => {
-        this.users = this.users.concat([
-          new User(user.getId(), user.getName())]);
+      onMessage: (response: UserResponse) => {
+        const user = new User(response.getId(), response.getName());
+        this.users.set(user.id, user);
       },
       onEnd: () => { }
     });
@@ -57,11 +59,14 @@ class App extends ReactiveComponent {
           onChange={(e) => this.newUser.name = e.target.value} />
         <button onClick={() => this.createUser()}>Create</button>
         <h2>Users</h2>
-        {this.users.map((user) =>
-          <div key={user.id}>{user.name}</div>
-        )}
+        <UserBrush name="users" data={this.users} render={this.renderUser} />
       </div>
     );
+  }
+
+  @bound
+  renderUser(user: User) {
+    return <div key={user.id}>{user.name}</div>;
   }
 
   createUser() {

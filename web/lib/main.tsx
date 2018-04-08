@@ -1,10 +1,21 @@
 import * as React from 'react';
-import { ReactiveComponent, Computation, observable, CollectionBrush, Store, bound } from 'telekinetic';
+import {
+  bound,
+  CollectionBrush,
+  CollectionBrushStore,
+  Computation,
+  observable,
+  ReactiveComponent,
+} from 'telekinetic';
 import { render } from 'react-dom';
 import { grpc } from 'grpc-web-client';
 
 import { WikiTribeService } from './_proto/wikitribe_pb_service';
-import { UserResponse, CreateUserRequest, ListUsersRequest } from './_proto/wikitribe_pb';
+import {
+  CreateUserRequest,
+  ListUsersRequest,
+  UserResponse,
+} from './_proto/wikitribe_pb';
 
 // @ts-ignore
 import * as styles from './main.scss';
@@ -24,11 +35,17 @@ class User {
   }
 }
 
-class UserBrush extends CollectionBrush<string, User>{ }
+class UserBrush extends CollectionBrush<string, User>{
+  name = 'users';
+}
+
+class UserBrushStore extends CollectionBrushStore<string, User> { }
 
 const RPC_HOST = 'http://localhost:3000';
 
 class App extends ReactiveComponent {
+  name = 'app';
+
   @observable
   message = '';
 
@@ -36,7 +53,7 @@ class App extends ReactiveComponent {
   newUser = new UserForm();
 
   @observable
-  users = new Store<string, User>();
+  users = new UserBrushStore();
 
   construct(comp: Computation) {
     const request = new ListUsersRequest();
